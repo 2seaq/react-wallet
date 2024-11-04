@@ -11,12 +11,17 @@ A related Spring Boot application is located in a separate repository.
 
 ### Standalone
 Run these commands to run standalone
-
+```
 git clone https://github.com/2seaq/react-wallet.git
+
 cd react-wallet/
+
 git add .
+
 npm install
+
 npm cache clean -force 
+```
 
 ###
 To build and run the react lightning UI with the Spring Boot application. Follow these steps:
