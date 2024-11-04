@@ -23,6 +23,6 @@ npm install
 npm cache clean -force 
 ```
 
-###
+### Spring Application
 To build and run the react lightning UI with the Spring Boot application. Follow these steps:
 
