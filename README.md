@@ -5,3 +5,10 @@ This is project is a simple implementation of a bitcoin lightning wallet UI. It 
 ## Service
 
 A related Spring Boot application is located in a separate repository.
+
+
+## Builing and Running
+
+To build and run the react lightning UI with the Spring Boot application. Follow these steps:
+
+TODO
