@@ -2,11 +2,10 @@
 
 This is project is a simple implementation of a bitcoin lightning wallet UI. It is purely an interface to connect to a service providing lightning payments. It is a react SPA which makes API calls to a separate service.
 
-![React Wallet Home](https://github.com/2seaq/react-wallet/tree/main/public/react-wallet-home.png)
-![React Wallet Recieve](https://github.com/2seaq/react-wallet/tree/main/public/react-wallet-receive.png)
-![React Wallet QR Code](https://github.com/2seaq/react-wallet/tree/main/public/react-wallet-qr.png)
-![React Wallet History](https://github.com/2seaq/react-wallet/tree/main/public/react-wallet-history.png)
-
+![react-wallet-home](https://github.com/user-attachments/assets/fc1472c5-09d1-47fb-b6ca-8d94fd9cdb4d)
+![react-wallet-receive](https://github.com/user-attachments/assets/576a3d77-a283-4d69-9196-9eaef337469f)
+![react-wallet-qr](https://github.com/user-attachments/assets/70ce764d-82ec-47e0-be55-8d97263ed9ea)
+![react-wallet-history](https://github.com/user-attachments/assets/8459c147-77cd-457f-94a5-25e16902cbbe)
 
 ## Service
 
