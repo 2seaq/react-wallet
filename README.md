@@ -7,6 +7,8 @@ This is project is a simple implementation of a bitcoin lightning wallet UI. It 
 ![react-wallet-qr](https://github.com/user-attachments/assets/70ce764d-82ec-47e0-be55-8d97263ed9ea)
 ![react-wallet-history](https://github.com/user-attachments/assets/8459c147-77cd-457f-94a5-25e16902cbbe)
 
+Note this is still needs alot of work and there are plenty of bugs :D
+
 ## Service
 
 A related Spring Boot application is located in a separate repository.
