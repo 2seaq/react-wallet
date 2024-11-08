@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { Icon } from '@mui/material';
 import CellTowerOutlinedIcon from '@mui/icons-material/CellTowerOutlined';
+import CircularProgress from '@mui/material/CircularProgress';
 
 export default class PayConfirmedWaiting extends React.Component {
 
@@ -24,9 +25,8 @@ export default class PayConfirmedWaiting extends React.Component {
 				<Box
 					display="flex" flexDirection="column" alignItems="center" justifyContent="center" height="75vh"	>
 					<Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" sx={{ width: '100%', height: '25%', bgcolor: '' }}>
-						<Icon style={{ fontSize: 100 }}>
-							<CellTowerOutlinedIcon style={{ fontSize: 100 }} />
-						</Icon><br />
+							<CircularProgress  size="80px"  />
+<br />
 						<Typography variant="h6" gutterBottom color="success">Sending Payment...</Typography>
 					</Box>
 					<Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" sx={{ width: '100%', height: '15%', bgcolor: '' }}>

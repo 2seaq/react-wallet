@@ -31,7 +31,7 @@ export default class Summary extends React.Component {
 								</Box>
 								<Box display="flex" flexDirection="column" alignItems="center" justifyContent="top" sx={{ width: '100%', height: '55%', bgcolor: '' }}>
 									<Typography variant="h5" gutterBottom>Balance</Typography>
-									<Typography variant="h3" gutterBottom>{availableBalance/1000} sats</Typography>
+									<Typography variant="h3" gutterBottom>{Number(availableBalance/1000).toLocaleString()} sats</Typography>
 								</Box>
 								<Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" sx={{ width: '100%', height: '25%', bgcolor: '' }}>
 									<ButtonGroup variant="contained" aria-label="outlined primary button group">
