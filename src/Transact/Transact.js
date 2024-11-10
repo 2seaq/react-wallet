@@ -3,6 +3,8 @@ import Summary from './Summary/Summary';
 import Send from './Send/Send';
 import Receive from './Receive/Receive';
 import { WalletContext } from '../context/WalletContext';
+import Box from '@mui/material/Box';
+
 
 export default class Transact extends React.Component {
 
@@ -36,9 +38,9 @@ export default class Transact extends React.Component {
 				onNavigate={this.handleClick} />];
 
 		return (
-			<div>
+			<Box>
 				{components[this.state.val]}
-			</div>
+			</Box>
 		)
 	}
 }

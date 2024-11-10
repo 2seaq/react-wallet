@@ -11,9 +11,6 @@ import Settings from './Settings/Settings';
 import Transact from './Transact/Transact';
 import WalletConnection from './WalletConnection';
 import SocketConnection from './SocketConnection';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import { amber, deepOrange, grey } from '@mui/material/colors';
 import LoggerDisplay from './LoggerDisplay';
 import { WalletContext } from './context/WalletContext';
 
@@ -30,7 +27,6 @@ export default class App extends React.Component {
 		this.state = {
 			val: 0,
 			loggedInManager: this.props.loggedInManager,
-			prefersDarkMode: window.matchMedia('(prefers-color-scheme: dark)').matches,
 		};
 	}
 
@@ -38,13 +34,6 @@ export default class App extends React.Component {
 
 		this.logMessage("INFO", "App Component Mounted");
 		this.logMessage("INFO", socketConnection.getStatus());
-
-		this.mediaQueryList = window.matchMedia('(prefers-color-scheme: dark)');
-		this.mediaQueryListener = (event) => {
-			this.setState({ prefersDarkMode: event.matches });
-		};
-		this.mediaQueryList.addEventListener('change', this.mediaQueryListener);
-
 		this.loadFromServer();
 
 		this.logMessage("INFO", "Register Socket Listeners");
@@ -69,18 +58,9 @@ export default class App extends React.Component {
 	}
 
 	componentWillUnmount() {
-		this.mediaQueryList.removeEventListener('change', this.mediaQueryListener);
 		// Clear the interval when the component is unmounted
 		clearInterval(this.interval);
 	}
-
-	createTheme = () => {
-		return createTheme({
-			palette: {
-				mode: this.state.prefersDarkMode ? 'dark' : 'light',
-			},
-		});
-	};
 
 	handleClick = (inval) => {
 		this.logMessage("INFO", "Navigate Tab : " + inval);
@@ -100,7 +80,6 @@ export default class App extends React.Component {
 	// Set Account state - Invoices Pays Deposits Account
 	getInvoicesAll = () => {
 		const { setInvoices } = this.context;
-	//	this.logMessage("INFO", "getInvoicesAll");
 		walletConnection.getInvoices().then(response => {
 			setInvoices(response.entity._embedded.invoices);
 			console.log("From GetIngoicesAll");
@@ -109,7 +88,6 @@ export default class App extends React.Component {
 
 	getPaysAll = () => {
 		const { setPayments } = this.context;
-	//	this.logMessage("INFO", "getPaysAll");
 		walletConnection.getPays().then(response => {
 			setPayments(response.entity._embedded.pays);
 		});
@@ -117,14 +95,12 @@ export default class App extends React.Component {
 
 	getDepositsAll = () => {
 		const { setDeposits } = this.context;
-	//	this.logMessage("INFO", "getDepositsAll");
 		walletConnection.getDeposits().then(response => {
 			setDeposits(response.entity._embedded.deposits);
 		});
 	}
 
 	getAccount = () => {
-//		this.logMessage("INFO", "getAccount " + this.context.availableBalance);
 		const { setAddress } = this.context;
 		const { setAvailableBalance } = this.context;
 		walletConnection.getAccount().then(response => {
@@ -154,7 +130,6 @@ export default class App extends React.Component {
 
 	// Scheduled Calls 
 	scheduledCall = () => {
-//		this.logMessage("INFO", "scheduled Call");
 		this.getDepositsAll();
 		this.getInvoicesAll();
 		this.getAccount();
@@ -165,75 +140,24 @@ export default class App extends React.Component {
 		log(messageTypeIn, messageIn);
 	};
 
-	getDesignTokens = (mode) => {
-		return {
-			palette: {
-				mode,
-				...(mode === 'light'
-					? {
-						// palette values for light mode
-						primary: amber,
-						divider: amber[200],
-						text: {
-							primary: grey[900],
-							secondary: grey[800],
-						},
-					}
-					: {
-						primary: deepOrange,
-						background: {
-						},
-						text: {
-							primary: '#2a231e',
-							secondary: '#2a231e',
-						},
-					}),
-			},
-			typography: {
-				fontFamily: [
-					'-apple-system',
-					'BlinkMacSystemFont',
-					'"Segoe UI"',
-					'Roboto',
-					'"Helvetica Neue"',
-					'Arial',
-					'sans-serif',
-					'"Apple Color Emoji"',
-					'"Segoe UI Emoji"',
-					'"Segoe UI Symbol"',
-				].join(','),
-			},
-		};
-	};
-
 	render() {
-
 		const components = [
 			<Transact />,
 			<History />,
 			<Settings />];
 
-		const { mode } = this.props;
-		const designTokens = this.getDesignTokens(mode);
-		const theme = createTheme(designTokens);
-
 		return (
-
-			<ThemeProvider theme={theme}>
-				<CssBaseline />
-				<Box sx={{ pb: 0 }}>
-					<Box sx={{ width: 1 }}>
+				<div>
+					<Box>
 						{components[this.state.val]}
 					</Box>
 					<Box sx={{ position: 'fixed', bottom: 70, left: 20, right: 0, width: 1 }} >
 						<LoggerDisplay />
 					</Box>
-					<Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+					<Box sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
 						<WalletBottomNav onNavigate={this.handleClick} />
-					</Paper>
-				</Box>
-			</ThemeProvider>
-
+					</Box>
+				</div>
 		)
 	}
 }

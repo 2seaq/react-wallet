@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Box, Button, Container, Grid, Typography } from '@mui/material';
-import './style.css';
 
 class Keypad extends Component {
   constructor(props) {
@@ -16,7 +15,7 @@ class Keypad extends Component {
 
   render() {
     return (
-      <Container className="App" maxWidth="sm">
+      <Container maxWidth="sm">
         <Box my={4} textAlign="center">
           <Box mt={2} className="keypad">
             <Grid container spacing={2}>

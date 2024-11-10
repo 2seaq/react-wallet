@@ -1,30 +1,29 @@
-// src/components/LoggerDisplay.js
 import React, { Component } from 'react';
 import { WalletConsumer } from './context/WalletContext';
+import Box from '@mui/material/Box';
 
 class LoggerDisplay extends Component {
     render() {
         return (
             <WalletConsumer>
                 {({ logs }) => (
-                    <div>
+                    <Box>
                             {
                              logs.map(
                                  (log, index) => {
                                     const opacity = index * 0.4; // Decrease opacity by 0.1 for each log
                                     return (
-                                        <div
+                                        <Box
                                             key={index}
                                             style={{ opacity: Math.max(opacity, 0.1) }} // Ensure minimum opacity of 0.1
                                         >
                                             {log}
-                                        </div>
+                                        </Box>
                                     );
-
                                  }
                                 )
                             }
-                    </div>
+                    </Box>
                 )}
             </WalletConsumer>
         );
