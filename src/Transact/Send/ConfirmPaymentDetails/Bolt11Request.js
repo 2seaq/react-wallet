@@ -142,8 +142,8 @@ export default class Bolt11Request extends React.Component {
 			<React.Fragment >
 				<Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" sx={{ width: '100%', bgcolor: '' }}>
 					<Typography variant="h5" gutterBottom>BOLT 11</Typography>
-					<Icon style={{ fontSize: 120, color: 'green' }}>
-						<BoltIcon style={{ fontSize: 120, color: 'c7ab00' }} />
+					<Icon style={{ fontSize: 140 }}>
+						<BoltIcon style={{ fontSize: 140, color: 'F7931A' }} />
 					</Icon><br />
 
 					{this.state.decodedBolt11.descriptionSet
@@ -170,10 +170,10 @@ export default class Bolt11Request extends React.Component {
 				</Box>
 				<Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" sx={{ width: '100%', height: '25%', bgcolor: '' }}>
 					<ButtonGroup>
-						<Button onClick={this.handleReset} variant="contained" startIcon={<HighlightOffIcon />}>
+						<Button onClick={this.handleReset} variant="outlined" startIcon={<HighlightOffIcon />}>
 							Cancel
 						</Button>
-						<Button onClick={this.handlePay} variant="contained" disabled={isDisabled} endIcon={<SendIcon />}>
+						<Button onClick={this.handlePay} variant="outlined" disabled={isDisabled} endIcon={<SendIcon />}>
 							Pay
 						</Button>
 					</ButtonGroup>

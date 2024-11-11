@@ -69,15 +69,15 @@ const theme = createTheme({
           borderColor: '#F7931A', // Primary outline color
           color: '#F7931A',
           '&:hover': {
-            borderColor: '#388E3C', // Darker border on hover
+            borderColor: '#000000', // Darker border on hover
             backgroundColor: 'rgba(76, 175, 80, 0.04)', // Light green hover effect
           },
         },
         outlinedSecondary: {
-          borderColor: '#FF5722', // Secondary outline color
-          color: '#FF5722',
+          borderColor: '#F7931A', // Secondary outline color
+          color: '#F7931A',
           '&:hover': {
-            borderColor: '#E64A19', // Darker border on hover
+            borderColor: '#F7931A', // Darker border on hover
             backgroundColor: 'rgba(255, 87, 34, 0.04)', // Light red hover effect
           },
         },
@@ -164,6 +164,19 @@ const theme = createTheme({
           backgroundColor: '#FFFFFF', // Background for details content
           borderTop: '1px solid #F7931A', // Divider line on top of details
         },
+      },
+    },
+    MuiCircularProgress: {
+      styleOverrides: {
+        root: {
+          color: '#F7931A', // Set custom color (primary blue in this example)
+        },
+        circle: {
+          strokeLinecap: 'round', // Makes the ends of the circular stroke rounded
+        },
+      },
+      defaultProps: {
+        thickness: 5, // Set the default thickness of the circle
       },
     },
   },
