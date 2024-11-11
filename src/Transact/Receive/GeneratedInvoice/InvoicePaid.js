@@ -30,7 +30,7 @@ export default class InvoicePaid extends React.Component  {
 					<Typography variant="h6" gutterBottom color="success">Payment Received</Typography>
 					</Box>		
 					<Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" sx={{ width: '100%', height: '15%', bgcolor: ''}}>
-					<Button onClick={this.handleReset} variant="contained" endIcon={<HighlightOffIcon />}>
+					<Button onClick={this.handleReset} variant="outlined" endIcon={<HighlightOffIcon />}>
 							Close
 						</Button>
 					</Box>

@@ -16,7 +16,7 @@ export default class ChooseInvoiceDetails extends React.Component {
 		super(props);
 		this.state = {
 			delay: 100,
-			draftinvoice: { amount: "", description: "" },
+			draftinvoice: { amount: 0, description: "React Payment" },
 			hasAmountError: false
 		};
 	}
@@ -29,7 +29,7 @@ export default class ChooseInvoiceDetails extends React.Component {
 	handleNewAmount = (valueIn) => {
 		this.setState((prevState) => ({
 			draftinvoice: {
-				amount: (prevState.draftinvoice?.amount) + valueIn,
+				amount: valueIn,
 				description: "React Payment",
 			},
 		}));
@@ -67,22 +67,22 @@ export default class ChooseInvoiceDetails extends React.Component {
 				<Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" sx={{ width: '100%', height: '25%', bgcolor: '' }}>
 					{(this.state.draftinvoice.amount === 0 || this.state.draftinvoice.description === "" || this.state.hasAmountError) ? (
 						<React.Fragment>
-							<ButtonGroup variant="contained" aria-label="outlined primary button group">
-								<Button onClick={this.handleReset} variant="contained" startIcon={<HighlightOffIcon />}>
+							<ButtonGroup variant="outlined" >
+								<Button onClick={this.handleReset} variant="outlined" startIcon={<HighlightOffIcon />}>
 									Cancel
 								</Button>
-								<Button onClick={this.handleCreateInvoice} variant="contained" disabled endIcon={<SendIcon />}>
+								<Button onClick={this.handleCreateInvoice} variant="outlined" disabled endIcon={<SendIcon />}>
 									Request
 								</Button>
 							</ButtonGroup>
 						</React.Fragment>
 					) : (
 						<React.Fragment>
-							<ButtonGroup variant="contained" aria-label="outlined primary button group">
-								<Button onClick={this.handleReset} variant="contained" startIcon={<HighlightOffIcon />}>
+							<ButtonGroup variant="outlined">
+								<Button onClick={this.handleReset} variant="outlined" startIcon={<HighlightOffIcon />}>
 									Cancel
 								</Button>
-								<Button onClick={this.handleCreateInvoice} variant="contained" endIcon={<SendIcon />}>
+								<Button onClick={this.handleCreateInvoice} variant="outlined" endIcon={<SendIcon />}>
 									Request
 								</Button>
 							</ButtonGroup>

@@ -9,6 +9,13 @@ import SendIcon from '@mui/icons-material/Send';
 import GetAppIcon from '@mui/icons-material/GetApp';
 import LinkIcon from '@mui/icons-material/Link';
 import CurrencyBitcoinIcon from '@mui/icons-material/CurrencyBitcoin';
+import CallMadeIcon from '@mui/icons-material/CallMade';
+import CallReceivedIcon from '@mui/icons-material/CallReceived';
+import LoginIcon from '@mui/icons-material/Login';
+import LogoutIcon from '@mui/icons-material/Logout';
+import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
+import Divider from '@mui/material/Divider';
+
 
 export default class History extends React.Component {
 
@@ -61,7 +68,7 @@ export default class History extends React.Component {
 							{
 								events.map((event, index) => (
 									<div key={index}>
-										<HistoryEvent event={event} />
+										<HistoryEvent event={event} /><Divider />
 									</div>
 								))
 							}
@@ -85,9 +92,9 @@ class HistoryEvent extends React.Component {
 			case 'Deposit':
 				return <LinkIcon />;
 			case 'Invoice':
-				return <GetAppIcon />;
+				return <LoginIcon />;
 			case 'Payment':
-				return <SendIcon />;
+				return <ArrowOutwardIcon />;
 			default:
 				return <CurrencyBitcoinIcon />;
 		}
@@ -157,6 +164,7 @@ class HistoryEvent extends React.Component {
 					}
 				/>
 			</ListItem>
+
 		)
 	}
 }

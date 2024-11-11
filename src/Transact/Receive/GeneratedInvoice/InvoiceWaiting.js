@@ -57,7 +57,7 @@ export default class InvoiceWaiting extends React.Component {
 							readOnly: true,
 						}}
 					/><br />
-					<Button onClick={this.handleReset} variant="contained" endIcon={<HighlightOffIcon />}>
+					<Button onClick={this.handleReset} variant="outlined" endIcon={<HighlightOffIcon />}>
 						Close
 					</Button>
 				</Box>

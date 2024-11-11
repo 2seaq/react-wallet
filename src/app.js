@@ -5,7 +5,6 @@ import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import ImportExportIcon from '@mui/icons-material/ImportExport';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import SettingsIcon from '@mui/icons-material/Settings';
-import Paper from '@mui/material/Paper';
 import History from './History/History';
 import Settings from './Settings/Settings';
 import Transact from './Transact/Transact';
@@ -82,7 +81,6 @@ export default class App extends React.Component {
 		const { setInvoices } = this.context;
 		walletConnection.getInvoices().then(response => {
 			setInvoices(response.entity._embedded.invoices);
-			console.log("From GetIngoicesAll");
 		});
 	}
 

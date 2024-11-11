@@ -29,7 +29,7 @@ export default class PayConfirmedFailed extends React.Component {
 						<Typography variant="h6" gutterBottom color="success">Payment Failure </Typography>
 					</Box>
 					<Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" sx={{ width: '100%', height: '15%', bgcolor: '' }}>
-						<br /><Button onClick={this.handleReset} variant="contained" endIcon={<HighlightOffIcon />}>
+						<br /><Button onClick={this.handleReset} variant="outlined" endIcon={<HighlightOffIcon />}>
 							Close
 						</Button>
 					</Box>

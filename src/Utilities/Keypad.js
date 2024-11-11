@@ -1,16 +1,31 @@
 import React, { Component } from 'react';
 import { Box, Button, Container, Grid, Typography } from '@mui/material';
+import GetAppIcon from '@mui/icons-material/GetApp';
 
 class Keypad extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: ''
+      value: '' // This holds the number input from the keypad
     };
   }
 
   handleButtonClick = (num) => {
-    this.props.handleNewAmount(num);
+    this.setState((prevState) => ({
+      value: prevState.value + num // Concatenate the new number
+    }), () => {
+      // Call a parent function if needed, with the updated value
+      this.props.handleNewAmount(this.state.value);
+    });
+  };
+
+  handleBackspace = () => {
+    this.setState((prevState) => ({
+      value: prevState.value.slice(0, -1) // Remove the last character
+    }), () => {
+      // Call a parent function if needed, with the updated value
+      this.props.handleNewAmount(this.state.value);
+    });
   };
 
   render() {
@@ -19,10 +34,17 @@ class Keypad extends Component {
         <Box my={4} textAlign="center">
           <Box mt={2} className="keypad">
             <Grid container spacing={2}>
-              {['1', '2', '3', '4', '5', '6', '7', '8', '9', '', '0'].map((num, index) => (
+              {['1', '2', '3', '4', '5', '6', '7', '8', '9', 'Back', '0'].map((num, index) => (
                 <Grid item xs={4} key={index}>
-                  {num === '' ? (
-                    <div></div> // This renders an empty grid item
+                  {num === 'Back' ? (
+                    <Button
+                      variant="outlined"
+                      onClick={this.handleBackspace}
+                      className="keypad-button"
+                      fullWidth
+                    >
+                      C
+                    </Button>
                   ) : (
                     <Button
                       variant="outlined"

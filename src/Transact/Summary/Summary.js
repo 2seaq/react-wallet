@@ -29,11 +29,11 @@ export default class Summary extends React.Component {
 									<Typography variant="h8" gutterBottom></Typography>
 								</Box>
 								<Box display="flex" flexDirection="column" alignItems="center" justifyContent="top" sx={{ width: '100%', height: '55%'}}>
-									<Typography variant="h5" gutterBottom>Balance</Typography>
+									<Typography variant="h5" gutterBottom>Balance:</Typography>
 									<Typography variant="h3" gutterBottom>{Number(availableBalance/1000).toLocaleString()} sats</Typography>
 								</Box>
 								<Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" sx={{ width: '100%', height: '25%' }}>
-									<ButtonGroup variant="contained" aria-label="outlined primary button group">
+									<ButtonGroup variant="outlined" aria-label="outlined primary button group">
 										<Button onClick={() => this.handleClick(2)} startIcon={<GetAppIcon />}>Receive</Button>
 										<Button onClick={() => this.handleClick(1)} endIcon={<SendIcon />}>Send</Button>
 									</ButtonGroup>
