@@ -7,7 +7,7 @@ class LoggerDisplay extends Component {
         return (
             <WalletConsumer>
                 {({ logs }) => (
-                    <Box sx={{ backgroundColor: 'white'}}>
+                    <Box >
                             {
                              logs.map(
                                  (log, index) => {

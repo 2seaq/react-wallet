@@ -1,8 +1,8 @@
 import * as React from 'react';
 import ContactlessIcon from '@mui/icons-material/Contactless';
 import { Icon } from '@mui/material';
-import Box from '@mui/material/Box';
 import NfcIcon from '@mui/icons-material/Nfc';
+import { Box, Typography } from '@mui/material';
 
 export default class NFCReader extends React.Component {
 
@@ -95,14 +95,20 @@ export default class NFCReader extends React.Component {
     const { reading, message } = this.state;
 
     return (
-      <div>
+      <Box alignItems="center" justifyContent="center"  sx={{ width: '100%', p: 0 }}>
         {this.state.NFCEnabled
           ? <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" sx={{ width: '100%', bgcolor: '' }}>
-            <Icon style={{ fontSize: 50 }}><NfcIcon style={{ fontSize: 50 }} /></Icon>
+            <Icon style={{ fontSize: 50 }}><ContactlessIcon style={{ fontSize: 50, padding: 1 }} /></Icon>
           </Box>
-          : <p>{message}</p>
+          :    <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" sx={{ width: '100%', bgcolor: '' }}>       <Typography
+          sx={{
+            fontSize: '0.5rem', // Very small font size
+          }}
+        >
+          {message}
+        </Typography></Box>
         }
-      </div>
+      </Box>
     );
   }
 }

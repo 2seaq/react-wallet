@@ -199,6 +199,48 @@ const theme = createTheme({
         },
       },
     },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          backgroundColor: '#ffffff', // Background color for TextField
+          borderRadius: 0, // Rounded corners
+        },
+      },
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          '& .MuiOutlinedInput-notchedOutline': {
+            borderColor: '#ccc', // Default border color
+          },
+          '&:hover .MuiOutlinedInput-notchedOutline': {
+            borderColor: '#F7931A', // Border color on hover
+          },
+          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+            borderColor: '#F7931A', // Border color when focused
+          },
+          borderRadius: 0, // Rounded corners for the outlined border
+        },
+        input: {
+          padding: '6px 6px', // Padding inside the input
+          fontSize: '1rem', // Custom font size for the input text
+        },
+      },
+    },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          top: '-20%', // Position the label in the center
+          color: '#F7931A', // Default label color
+          width: '100%', // Ensures the label takes full width of the TextField
+          transformOrigin: 'center', // Center the transformation point
+          fontSize: '0.875rem', // Custom font size for the label
+          '&.Mui-focused': {
+            color: '#F7931A', // Label color when focused
+          },
+        },
+      },
+    },
   },
 });
 
