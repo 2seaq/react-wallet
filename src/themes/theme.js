@@ -69,8 +69,8 @@ const theme = createTheme({
           borderColor: '#F7931A', // Primary outline color
           color: '#F7931A',
           '&:hover': {
-            borderColor: '#000000', // Darker border on hover
-            backgroundColor: 'rgba(76, 175, 80, 0.04)', // Light green hover effect
+            borderColor: '#F7931A', // Darker border on hover
+            backgroundColor: 'rgba(255, 87, 34, 0.04)', // Light green hover effect
           },
         },
         outlinedSecondary: {
