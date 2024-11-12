@@ -57,11 +57,9 @@ export default class ChooseInvoiceDetails extends React.Component {
 				display="flex" flexDirection="column" alignItems="center" justifyContent="center" height="75vh"	>
 				<Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" sx={{ width: '100%', height: '0%', bgcolor: '' }}>
 				</Box>
-				<Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" sx={{ width: '100%', height: '55%', bgcolor: '' }}>
-					<React.Fragment>
-						<Typography variant="h2" gutterBottom>{this.state.draftinvoice.amount} sats</Typography>
-						<Typography variant="h4" gutterBottom>{this.state.draftinvoice.description}</Typography>
-					</React.Fragment>
+				<Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" sx={{ width: '100%', height: '65%', bgcolor: '' }}>
+					<Typography variant="h4">{this.state.draftinvoice.amount} sats</Typography>
+					<Typography variant="h6">{this.state.draftinvoice.description}</Typography>
 					<Keypad handleNewAmount={this.handleNewAmount}></Keypad>
 				</Box>
 				<Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" sx={{ width: '100%', height: '25%', bgcolor: '' }}>

@@ -149,7 +149,7 @@ export default class App extends React.Component {
 					<Box>
 						{components[this.state.val]}
 					</Box>
-					<Box sx={{ position: 'fixed', bottom: 70, left: 20, right: 0, width: 1 }} >
+					<Box sx={{ position: 'fixed', bottom: 60, left: 10, right: 0, width: 0.25 }} >
 						<LoggerDisplay />
 					</Box>
 					<Box sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>

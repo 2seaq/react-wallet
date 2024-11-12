@@ -10,7 +10,7 @@ export class WalletProvider extends Component {
         deposits: [],
         payments: [],
         logs: [],
-        maxLogSize: 5
+        maxLogSize: 4
     };
 
     setInvoices = (invoicesIn) => {
@@ -64,7 +64,7 @@ export class WalletProvider extends Component {
         const formattedTime = `${hours.toString().padStart(2, '0')}:
         ${minutes.toString().padStart(2, '0')}:
         ${seconds.toString().padStart(2, '0')}:
-        ${mseconds.toString().padStart(3, '0')}`;
+        ${mseconds.toString().padStart(2, '0')}`;
 
         const timestamp = new Date().toISOString();
         this.setState(prevState => {

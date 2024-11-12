@@ -179,6 +179,25 @@ const theme = createTheme({
         thickness: 5, // Set the default thickness of the circle
       },
     },
+    MuiListItem: {
+      styleOverrides: {
+        root: {
+          backgroundColor: '#fff', // Set a light grey background for ListItems
+          padding: '0px 8px', // Adjust padding for ListItem
+          borderRadius: '0px', // Rounded corners for ListItem
+          marginBottom: '2px', // Space between ListItems
+          '&:hover': {
+            backgroundColor: '#e0e0e0', // Hover effect: lighter grey
+          },
+          '&.Mui-selected': {
+            backgroundColor: '#d0d0d0', // Background color when selected
+          },
+          '&.MuiListItem-button': {
+            padding: '10px 14px', // Button-like behavior for ListItems
+          },
+        },
+      },
+    },
   },
 });
 

@@ -31,7 +31,7 @@ export default class InvoiceQRScanner extends React.Component {
 				<Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" sx={{ width: '100%', bgcolor: '' }}>
 					<TextField onChange={this.props.handleTextInput} id="lnurltextfield" label="Enter Invoice/LNURL" fullWidth />
 				</Box><br />
-				<Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" sx={{ width: '100%', pt: '5px', bgcolor: '' }}>
+				<Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" sx={{ width: '100%' }}>
 					<Button onClick={this.handleCancel} variant="outlined" endIcon={<HighlightOffIcon />}>
 						Cancel
 					</Button>

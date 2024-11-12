@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { WalletConsumer } from './context/WalletContext';
-import Box from '@mui/material/Box';
+import { Box, Typography } from '@mui/material';
 
 class LoggerDisplay extends Component {
     render() {
         return (
             <WalletConsumer>
                 {({ logs }) => (
-                    <Box>
+                    <Box sx={{ backgroundColor: 'white'}}>
                             {
                              logs.map(
                                  (log, index) => {
@@ -17,7 +17,14 @@ class LoggerDisplay extends Component {
                                             key={index}
                                             style={{ opacity: Math.max(opacity, 0.1) }} // Ensure minimum opacity of 0.1
                                         >
-                                            {log}
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      fontSize: '0.4rem', // Very small font size
+                    }}
+                  >
+                    {log}
+                  </Typography>
                                         </Box>
                                     );
                                  }
