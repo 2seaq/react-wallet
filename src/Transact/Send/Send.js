@@ -85,7 +85,7 @@ export default class Send extends React.Component {
 
 		return (
 			<div>
-				<Box sx={{ width: '100%', p: 2 }}>
+				<Box sx={{ width: '100%', p: 0 }}>
 					<Stepper activeStep={activeStep}>
 						{steps.map((label, index) => {
 							const stepProps = {};

@@ -86,6 +86,7 @@ const theme = createTheme({
     MuiStepLabel: {
       styleOverrides: {
         label: {
+          fontSize: '0.6rem', // Custom font size
           color: '#F7931A', // Default label color
           '&.Mui-active': {
             color: '#F7931A', // Active step label color
