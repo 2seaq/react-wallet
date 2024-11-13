@@ -3,6 +3,7 @@ const client = require('./client');
 
 // This class has dummy responses for testing purposes
 // the client calls should be used in an implementation
+// The API Calls need rejection handling to be implemented.
 
 export default class WalletConnection extends Component {
 
