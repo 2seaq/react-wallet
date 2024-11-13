@@ -95,14 +95,14 @@ export default class NFCReader extends React.Component {
     const { reading, message } = this.state;
 
     return (
-      <Box alignItems="center" justifyContent="center"  sx={{ width: '100%', p: 0 }}>
+      <Box alignItems="center" justifyContent="center"  sx={{ width: '100%', pb: 1 }}>
         {this.state.NFCEnabled
-          ? <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" sx={{ width: '100%', bgcolor: '' }}>
-            <Icon style={{ fontSize: 50 }}><ContactlessIcon style={{ fontSize: 50, padding: 1 }} /></Icon>
+          ? <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" sx={{ width: '100%'}}>
+            <Icon style={{ fontSize: 30}}><ContactlessIcon style={{ fontSize: 30}} /></Icon>
           </Box>
-          :    <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" sx={{ width: '100%', bgcolor: '' }}>       <Typography
+          :    <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" sx={{ width: '100%' }}>       <Typography
           sx={{
-            fontSize: '0.5rem', // Very small font size
+            fontSize: '0.6rem', // Very small font size
           }}
         >
           {message}

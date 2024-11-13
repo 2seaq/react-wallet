@@ -113,13 +113,15 @@ class LNURLRequest extends Component {
 
     return (
       <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" sx={{ padding: 0, width: '100%' }}>
-        <Box>
+        <Box display="flex" alignItems="center" justifyContent="center" sx={{ width: '90%' }}>
+        <Box  mr={2}>
           {lnurljpeg ? <img src={`data:image/jpeg;base64,${lnurljpeg}`} alt="JPEG" /> : lnurlpng ? <img src={`data:image/png;base64,${lnurlpng}`} alt="PNG" /> :
             <Icon style={{ fontSize: 80, color: 'green' }}><AccountCircleIcon style={{ fontSize: 80, color: 'orange' }} /></Icon>}
         </Box>
-        <Typography variant="body1" gutterBottom>{description}</Typography>
-        <Typography variant="body1" gutterBottom>{longDescription}</Typography>
-        <Typography variant="body1" gutterBottom>{this.state.draftPayment.bolt11}</Typography>
+        <Typography>{description}</Typography>
+        <Typography>{longDescription}</Typography>
+        </Box>
+        <Typography>{this.state.draftPayment.bolt11}</Typography>
         <Typography variant="h6" gutterBottom>{amount_msat/1000} Sats</Typography>
 
         {this.state.decodedlnurl.commentAllowed !== 'undefined' && (
@@ -127,13 +129,11 @@ class LNURLRequest extends Component {
             error={this.state.hasCommentError}
             helperText={this.state.hasCommentError ? 'Comment too long' : ''}
             onChange={this.handleCommentChange}
-            label="Comment to Send"
             sx={{ m: 1, width: '25ch' }}
             InputProps={{ startAdornment: <InputAdornment position="start">comment</InputAdornment> }}
           />
         )}
         <Keypad handleNewAmount={this.handleNewAmount} />
-
         <Box display="flex" justifyContent="center" width="100%">
           <ButtonGroup>
             <Button onClick={this.props.handleReset} variant="outlined" startIcon={<HighlightOffIcon />}>Cancel</Button>

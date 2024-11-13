@@ -33,30 +33,28 @@ export default class InvoiceWaiting extends React.Component {
 
 		return (
 
-			<Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" height="70vh"	>
-				<Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" sx={{ width: '100%', height: '10%', bgcolor: '' }}>
-					<Typography variant="h6" gutterBottom>Payment Request QR Code</Typography><CountdownTimer seconds={1800} handleExpired={this.handleExpired} />
+			<Box display="flex" flexDirection="column" alignItems="center" justifyContent="flex-start" height="65vh" gap={1}  mt={2}>
+				<Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" >
+					<CountdownTimer seconds={1800} handleExpired={this.handleExpired} />
 				</Box>
-				<Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" sx={{ width: '100%', height: '55%', bgcolor: '' }}>
+				<Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" sx={{ width: '100%', height: '55%'}} gap={1}>
 					<QRCode
 						size={256}
 						style={{ height: "auto", maxWidth: "100%", width: "100%" }}
 						value={modifiedValue}
 						viewBox={`0 0 256 256`}
 					/>
-					<br />
-					<Typography variant="h7" gutterBottom>{amountMsatVal/1000} sats</Typography>
-					<Typography variant="h7" gutterBottom>{descriptionVal}</Typography>
+					<Typography variant="h6">{amountMsatVal/1000} sats</Typography>
+					<Typography variant="body">{descriptionVal}</Typography>
 				</Box>
-				<Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" sx={{ width: '100%', bgcolor: '' }}>
+				<Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" sx={{ width: '100%' }} gap={1}>
 					<TextField
 						id="outlined-read-only-input"
-						label="Bolt11"
 						value={modifiedValue}
 						InputProps={{
 							readOnly: true,
 						}}
-					/><br />
+					/>
 					<Button onClick={this.handleReset} variant="outlined" endIcon={<HighlightOffIcon />}>
 						Close
 					</Button>

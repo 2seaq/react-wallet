@@ -15,8 +15,10 @@ import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import Divider from '@mui/material/Divider';
-
-
+import { Typography } from '@mui/material';
+import SouthWestIcon from '@mui/icons-material/SouthWest';
+import NorthEastIcon from '@mui/icons-material/NorthEast';
+import SaveAltIcon from '@mui/icons-material/SaveAlt'; 
 export default class History extends React.Component {
 
 	constructor(props) {
@@ -90,22 +92,14 @@ class HistoryEvent extends React.Component {
 		const { source } = this.props.event;
 		switch (source) {
 			case 'Deposit':
-				return <LinkIcon />;
+				return <SaveAltIcon />;
 			case 'Invoice':
-				return <LoginIcon />;
+				return <SouthWestIcon />;
 			case 'Payment':
-				return <ArrowOutwardIcon />;
+				return <NorthEastIcon />;
 			default:
 				return <CurrencyBitcoinIcon />;
 		}
-	}
-
-	formatCurrency(amountMsat) {
-		const amount = amountMsat / 1000; // Assuming msat is thousandths of a currency unit
-		return new Intl.NumberFormat('en-US', {
-			style: 'currency',
-			currency: 'SAT' // Change 'USD' to desired currency code if needed
-		}).format(amount);
 	}
 
 	formatTimestamp(timestamp) {
@@ -145,7 +139,7 @@ class HistoryEvent extends React.Component {
 								<Grid component="span" item xs={4} style={{ textAlign: 'left' }}>
 								{this.props.event.source}								</Grid>
 								<Grid component="span" item xs={8} style={{ textAlign: 'right' }}>
-								{this.formatCurrency(this.props.event.amountMsat)}
+								{Number(Math.round(this.props.event.amountMsat / 1000)).toLocaleString()} sats
 								</Grid>
 							</Grid>
 						</React.Fragment>
@@ -154,10 +148,24 @@ class HistoryEvent extends React.Component {
 						<React.Fragment>
 							<Grid component="span" container spacing={2}>
 								<Grid component="span" item xs={6} style={{ textAlign: 'left' }}>
+
+									<Typography
+                    sx={{
+                        fontSize: '0.7rem', // Very small font size
+                      }}
+                  >
 									{this.props.event.description}
+                  </Typography>
 								</Grid>
 								<Grid component="span" item xs={6} style={{ textAlign: 'right' }}>
+								<Typography
+                    sx={{
+                        fontSize: '0.7rem', // Very small font size
+                      }}
+                  >
 									{this.formatTimestamp(this.props.event.timestamp)}
+                  </Typography>
+
 								</Grid>
 							</Grid>
 						</React.Fragment>

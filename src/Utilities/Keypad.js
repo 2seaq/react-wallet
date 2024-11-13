@@ -31,9 +31,9 @@ class Keypad extends Component {
   render() {
     return (
       <Container maxWidth="sm">
-        <Box my={4} textAlign="center">
-          <Box mt={2} className="keypad">
-            <Grid container spacing={2}>
+        <Box my={1.5} textAlign="center">
+          <Box mt={0} className="keypad">
+            <Grid container spacing={1}>
               {['1', '2', '3', '4', '5', '6', '7', '8', '9', 'Back', '0'].map((num, index) => (
                 <Grid item xs={4} key={index}>
                   {num === 'Back' ? (
@@ -42,6 +42,7 @@ class Keypad extends Component {
                       onClick={this.handleBackspace}
                       className="keypad-button"
                       fullWidth
+                      sx={{ padding: '5px 8px' }}                      
                     >
                       C
                     </Button>
@@ -51,6 +52,7 @@ class Keypad extends Component {
                       onClick={() => this.handleButtonClick(num)}
                       className="keypad-button"
                       fullWidth
+                      sx={{ padding: '5px 8px' }}
                     >
                       {num}
                     </Button>

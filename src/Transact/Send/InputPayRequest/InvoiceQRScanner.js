@@ -19,16 +19,16 @@ export default class InvoiceQRScanner extends React.Component {
 	render() {
 		return (
 			<React.Fragment>
-				<Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" sx={{ width: '100%', bgcolor: '' }}>
+				<Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" sx={{ width: '100%'}}>
 					<NFCReader onRead={this.props.handleNFCRead} />
 				</Box>
-				<Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" sx={{ width: '100%', bgcolor: '' }}>
+				<Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" sx={{ width: '100%'}}>
 					<QrScanner
 						onDecode={this.props.handleDecode}
 						onError={(error) => console.log(error?.message)}
 					/>
 				</Box>
-				<Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" sx={{ width: '100%', paddingBottom: 2}}>
+				<Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" sx={{ width: '100%', paddingBottom: 1}}>
 					<TextField onChange={this.props.handleTextInput} id="lnurltextfield" label="Enter Invoice/LNURL" fullWidth />
 				</Box>
 				<Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" sx={{ width: '100%' }}>
