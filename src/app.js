@@ -14,7 +14,11 @@ import LoggerDisplay from './LoggerDisplay';
 import { WalletContext } from './context/WalletContext';
 
 const walletConnection = new WalletConnection();
-const socketConnection = new SocketConnection("https://localhost:3000/websocket");
+//React Standalone
+const socketConnection = new SocketConnection("http://localhost:3000/websocket");
+
+//Spring SSL
+//const socketConnection = new SocketConnection("https://localhost:8443/websocket");
 const stompClient = require('./websocket-listener');
 
 export default class App extends React.Component {
@@ -37,21 +41,20 @@ export default class App extends React.Component {
 
 		this.logMessage("INFO", "Register Socket Listeners");
 		socketConnection.isEndPointActive()
-			.then(response => {
-				if (!response.ok) throw new Error('Network response was not ok');
-				return response.json();
-			})
-			.then(result => {
-				socketConnection.register([
-					{ route: '/user/queue/newInvoiceCreated', callback: this.newInvoiceCreated },
-					{ route: '/user/queue/invoicePaid', callback: this.invoicePaid },
-					{ route: '/user/queue/newPayCreated', callback: this.newPayCreated },
-				]);
-				this.logMessage("INFO", "Socket Registration ok")
-			})
-			.catch(error => [
-				this.logMessage("INFO", "Socket Endpoint Not Active")
+		.then(isActive => {
+			if (!isActive) throw new Error('Network response was not ok');
+			// Proceed with registration if the endpoint is active
+			socketConnection.register([
+				{ route: '/user/queue/newInvoiceCreated', callback: this.newInvoiceCreated },
+				{ route: '/user/queue/invoicePaid', callback: this.invoicePaid },
+				{ route: '/user/queue/newPayCreated', callback: this.newPayCreated },
 			]);
+			this.logMessage("INFO", "Socket Registration ok");
+		})
+		.catch(error => {
+			this.logMessage("INFO", "Socket Endpoint Not Active");
+		});
+	
 
 		this.interval = setInterval(this.scheduledCall, 4000);
 	}

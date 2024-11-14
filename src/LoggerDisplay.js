@@ -20,7 +20,7 @@ class LoggerDisplay extends Component {
                   <Typography
                     variant="body2"
                     sx={{
-                        fontSize: '0.6rem', // Very small font size
+                        fontSize: '0.8rem', // Very small font size
                         textAlign: 'left',  // Align text to the left
                       }}
                   >
