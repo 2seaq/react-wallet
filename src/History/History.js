@@ -20,9 +20,9 @@ export default class History extends React.Component {
 	mergeAndSortEvents(deposits, invoices, payments) {
 		const allEvents = [
 			...deposits.map(item => ({
-				timestamp: item.timestamp,
-				description: item.description,
-				amountMsat: item.amountMsat,
+				timestamp: item.blockheight,
+				description: item.txid.substring(0, 10),
+				amountMsat: item.amount_msat,
 				status: item.status,
 				source: 'Deposit'
 			})),
@@ -146,15 +146,11 @@ class HistoryEvent extends React.Component {
 					secondary={
 						<React.Fragment>
 							<Grid component="span" container spacing={2}>
-								<Grid component="span" item xs={6} style={{ textAlign: 'left' }}>
-									<Typography sx={{ fontSize: '0.7rem' }}>
+								<Grid component="span" item xs={6} style={{ textAlign: 'left', fontSize: '0.7rem' }}>
 										{this.props.event.description} {this.props.event.status}
-									</Typography>
 								</Grid>
-								<Grid component="span" item xs={6} style={{ textAlign: 'right' }}>
-									<Typography sx={{ fontSize: '0.7rem' }}>
+								<Grid component="span" item xs={6} style={{ textAlign: 'right', fontSize: '0.7rem' }}>
 										{this.formatTimestamp(this.props.event.timestamp)}
-									</Typography>
 								</Grid>
 							</Grid>
 						</React.Fragment>

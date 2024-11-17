@@ -147,13 +147,11 @@ export default class WalletConnection extends Component {
 
 			const data = {
 				entity: {
-					_embedded: {
-						deposits: [
-							{ timestamp: "1731075956", description: "Deposit for Funding A", amountMsat: "323432434", status: 'paid' },
-							{ timestamp: "1731075956", description: "Deposit for Funding B", amountMsat: "323432434", status: 'paid' },
-							{ timestamp: "1331065956", description: "Dep CSH Basd", amountMsat: "323432434", status: 'unpaid' }
+						outputs: [
+							{ blockheight: "1731075956", txid: "Deposit for Funding A", amount_msat: "323432434", status: 'paid' },
+							{ blockheight: "1731075956", txid: "Deposit for Funding B", amount_msat: "323432434", status: 'paid' },
+							{ blockheight: "1331065956", txid: "Dep CSH Basd", amount_msat: "323432434", status: 'unpaid' }
 						]
-					},
 				}
 			};
 

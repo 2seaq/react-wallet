@@ -16,7 +16,6 @@ export default class Transact extends React.Component {
 	}
 
 	handleClick = (inval) => {
-		this.logMessage("Info", "Navigate " + inval);
 		this.setState({
 			val: inval
 		});

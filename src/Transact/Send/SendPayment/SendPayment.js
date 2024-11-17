@@ -19,7 +19,6 @@ export default class SendPayment extends React.Component {
 	}
 
 	componentDidMount() {
-
 		walletConnection.sendPay(this.props.payment).then(response => {
 
 			this.setState({

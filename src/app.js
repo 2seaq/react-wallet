@@ -19,6 +19,10 @@ const socketConnection = new SocketConnection("http://localhost:3000/websocket")
 
 //Spring SSL
 //const socketConnection = new SocketConnection("https://localhost:8443/websocket");
+
+//CUSTOM
+//const socketConnection = new SocketConnection("https://www.yourwebsocketwebsite.com/websocket");
+
 const stompClient = require('./websocket-listener');
 
 export default class App extends React.Component {
@@ -65,7 +69,7 @@ export default class App extends React.Component {
 	}
 
 	handleClick = (inval) => {
-		this.logMessage("INFO", "Navigate Tab : " + inval);
+//		this.logMessage("INFO", "Navigate Tab : " + inval);
 		this.setState({
 			val: inval
 		});
@@ -97,7 +101,7 @@ export default class App extends React.Component {
 	getDepositsAll = () => {
 		const { setDeposits } = this.context;
 		walletConnection.getDeposits().then(response => {
-			setDeposits(response.entity._embedded.deposits);
+			setDeposits(response.entity.outputs);
 		});
 	}
 

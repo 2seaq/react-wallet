@@ -10,7 +10,7 @@ export class WalletProvider extends Component {
         deposits: [],
         payments: [],
         logs: [],
-        maxLogSize: 10
+        maxLogSize: 1
     };
 
     setInvoices = (invoicesIn) => {

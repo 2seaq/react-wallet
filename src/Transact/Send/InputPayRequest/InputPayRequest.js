@@ -26,7 +26,7 @@ export default class InputPayRequest extends React.Component {
 	extractBitcoinLightningAddress = (inputString) => {
 
 		if (inputString.toLowerCase().includes("lnbc")) {
-			const startIndex = inputString.indexOf("lnbc");
+			const startIndex = inputString.toLowerCase().indexOf("lnbc");
 			const bolt11 = inputString.slice(startIndex);
 			return ["BOLT11", bolt11];
 		}
@@ -49,14 +49,15 @@ export default class InputPayRequest extends React.Component {
 
 		if (!!data) {
 			const lightningAddress = this.extractBitcoinLightningAddress(data);
+			this.logMessage("INFO", "handleDecode " + data);
 
 			if (lightningAddress != null) {
 				if (lightningAddress[0] == "BOLT11") {
-					this.logMessage("INFO", "Bolt11 Invoice Found");
+					this.logMessage("INFO", "Bolt11 Invoice Found " + lightningAddress[1]);
 					this.props.setPayRequest(lightningAddress[1], "BOLT11");
 				}
 				if (lightningAddress[0] == "LNURL") {
-					this.logMessage("INFO", "LNURL Address Found");
+					this.logMessage("INFO", "LNURL Address Found " + lightningAddress[1]);
 					this.props.setPayRequest(lightningAddress[1], "LNURL");
 				}
 			}
