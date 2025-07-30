@@ -3,30 +3,35 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@fontsource/roboto": "^5.0.5",
     "@mui/icons-material": "^5.14.1",
     "@mui/material": "^5.14.1",
     "@mui/styled-engine-sc": "^5.12.0",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
     "@yudiel/react-qr-scanner": "^1.1.9",
     "buffer": "^6.0.3",
+    "cra-template-pwa": "^2.0.0",
     "js-lnurl": "^0.6.0",
     "net": "^1.0.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-qr-code": "^2.0.11",
+    "react-scripts": "5.0.1",
     "rest": "^2.0.0",
     "sockjs-client": "^1.6.1",
     "stompjs": "^2.3.3",
     "stream": "^0.0.2",
     "styled-components": "^5.3.11",
-    "when": "^3.7.8"    
+    "web-vitals": "^2.1.4",
+    "when": "^3.7.8",
+    "workbox-core": "^7.3.0",
+    "workbox-precaching": "^7.3.0",
+    "workbox-routing": "^7.3.0",
+    "workbox-strategies": "^7.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -51,5 +56,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "resolutions": {
+  "@yudiel/react-qr-scanner": "latest"
+}
 }

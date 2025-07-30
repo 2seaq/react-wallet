@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Box, Button, Container, Grid, Typography } from '@mui/material';
-import GetAppIcon from '@mui/icons-material/GetApp';
 
 class Keypad extends Component {
   constructor(props) {
@@ -10,7 +9,7 @@ class Keypad extends Component {
     };
   }
 
-  handleButtonClick = (num) => {
+  handleButtonClickOG = (num) => {
     this.setState((prevState) => ({
       value: prevState.value + num // Concatenate the new number
     }), () => {
@@ -19,7 +18,7 @@ class Keypad extends Component {
     });
   };
 
-  handleBackspace = () => {
+  handleBackspaceOG = () => {
     this.setState((prevState) => ({
       value: prevState.value.slice(0, -1) // Remove the last character
     }), () => {
@@ -27,6 +26,25 @@ class Keypad extends Component {
       this.props.handleNewAmount(this.state.value);
     });
   };
+
+  handleBackspace = () => {
+  this.setState((prevState) => {
+    const newValue = prevState.value.slice(0, -1);
+    return { value: newValue === '' ? '0' : newValue };
+  }, () => {
+    this.props.handleNewAmount(this.state.value);
+  });
+};
+
+handleButtonClick = (num) => {
+  this.setState((prevState) => {
+    const newValue = prevState.value === '0' ? num : prevState.value + num;
+    return { value: newValue };
+  }, () => {
+    this.props.handleNewAmount(this.state.value);
+  });
+};
+
 
   render() {
     return (
@@ -38,21 +56,19 @@ class Keypad extends Component {
                 <Grid item xs={4} key={index}>
                   {num === 'Back' ? (
                     <Button
-                      variant="outlined"
+                      variant="keypad"
                       onClick={this.handleBackspace}
                       className="keypad-button"
-                      fullWidth
-                      sx={{ padding: '5px 8px' }}                      
+                      fullWidth              
                     >
                       C
                     </Button>
                   ) : (
                     <Button
-                      variant="outlined"
+                      variant="keypad"
                       onClick={() => this.handleButtonClick(num)}
                       className="keypad-button"
                       fullWidth
-                      sx={{ padding: '5px 8px' }}
                     >
                       {num}
                     </Button>

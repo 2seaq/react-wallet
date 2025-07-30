@@ -1,12 +1,12 @@
-import { createTheme} from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#FFFFFF',      // Custom primary color
+      main: '#F7931A',      // Custom primary color
       light: '#F7931A',     // Custom lighter shade
       dark: '#F7931A',      // Custom darker shade
-      contrastText: '#F7931A', // Custom text color for buttons, etc.
+      contrastText: '#000000', // Custom text color for buttons, etc.
     },
     secondary: {
       main: '#F7931A',
@@ -15,17 +15,18 @@ const theme = createTheme({
       default: '#FFFFFF',
     },
     text: {
-      primary: '#F7931A',
-      secondary: '#F7931A',
+      primary: '#000000', //F7931A
+      //   secondary: '#F7931A',
     },
   },
   typography: {
     fontFamily: [
-      '-apple-system',
+      'system-ui',
+      '-apple-system',     // SF Pro on macOS/iOS
       'BlinkMacSystemFont',
-      '"Segoe UI"',
-      'Roboto',
-      '"Helvetica Neue"',
+      '"Segoe UI"',        // Windows
+      'Roboto',            // Android
+      '"Helvetica Neue"',  // Older iOS/macOS
       'Arial',
       'sans-serif',
       '"Apple Color Emoji"',
@@ -34,55 +35,137 @@ const theme = createTheme({
     ].join(','),
   },
   components: {
-    MuiBottomNavigation: {
+    MuiCssBaseline: {
       styleOverrides: {
-        root: {
-          backgroundColor: '#FFFFFF', // Set your desired background color
-          color: '#F7931A',              // Optional: text color for contrast
-          boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.2)', // Custom elevation using box-shadow
-
+        html: {
+          height: '100%',
+          margin: 0,
+          padding: 0,
+          //       overflow: 'hidden',
+        },
+        body: {
+          height: '100%',
+          margin: 0,
+          padding: 0,
+          //     overflow: 'hidden',
+        },
+        '#root': {
+          height: '100%',
         },
       },
     },
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: 8, // Rounded corners
-          padding: '10px 20px', // Custom padding
-          textTransform: 'none', // Remove uppercase transformation
-          fontSize: '1rem', // Custom font size
-          fontWeight: 600, // Make font bold
-        },
-        containedPrimary: {
+          color: '#FFFFFF',
           backgroundColor: '#F7931A', // Primary button background
+          borderRadius: 6, // Rounded corners
+          padding: '10px 50px', // Custom padding
+          textTransform: 'none', // Remove uppercase transformation
+          fontSize: '1.3rem', // Custom font size
+          fontWeight: 400, // Make font bold
           '&:hover': {
-            backgroundColor: '#388E3C', // Darker shade on hover
+            backgroundColor: '#e07c00', // A slightly darker orange
+            color: '#FFFFFF', // Keep text white
           },
-        },
-        containedSecondary: {
-          backgroundColor: '#FF5722', // Secondary button background
-          '&:hover': {
-            backgroundColor: '#E64A19', // Darker shade on hover
-          },
-        },
-        outlinedPrimary: {
-          borderColor: '#F7931A', // Primary outline color
-          color: '#F7931A',
-          '&:hover': {
-            borderColor: '#F7931A', // Darker border on hover
-            backgroundColor: 'rgba(255, 87, 34, 0.04)', // Light green hover effect
-          },
-        },
-        outlinedSecondary: {
-          borderColor: '#F7931A', // Secondary outline color
-          color: '#F7931A',
-          '&:hover': {
-            borderColor: '#F7931A', // Darker border on hover
-            backgroundColor: 'rgba(255, 87, 34, 0.04)', // Light red hover effect
+          '&.Mui-disabled': {
+            backgroundColor: '#FFFFFF',  // 🔥 white background for disabled
+            color: '#A0A0A0',            // optional: greyed-out text
+            border: '1px solid #ccc',    // optional: add border if needed
           },
         },
       },
+      variants: [
+        {
+          props: { variant: 'keypad' },
+          style: {
+            backgroundColor: '#FFFFFF',
+            color: '#000000',
+            borderRadius: 6,
+            padding: '15px 8px',
+            textTransform: 'none',
+            fontWeight: 500,
+            fontSize: '1.5rem', // 👈 Increase this for bigger text
+
+            '&:hover': {
+              backgroundColor: '#f0f0f0',
+              color: '#000000',
+              fontWeight: 900,
+            },
+          },
+        },
+        {
+          props: { variant: 'copy' },
+          style: {
+            backgroundColor: '#fff',
+            color: '#000',
+            border: '1px solid #ccc',
+            borderRadius: 6,
+            textTransform: 'none',
+            padding: '6px 16px',
+            fontWeight: 500,
+            fontSize: '0.875rem',
+            '&:hover': {
+              backgroundColor: '#f5f5f5',
+              borderColor: '#999',
+              color: '#000', // Ensure it stays black
+            },
+            '&:focus': {
+              backgroundColor: '#fff',
+              color: '#000', // Prevent text from turning white
+              outline: 'none',
+            },
+            '&:active': {
+              backgroundColor: '#eaeaea', // Optional: subtle press effect
+              color: '#000',
+            },
+          },
+        },
+      ],
     },
+
+
+    MuiBottomNavigation: {
+      styleOverrides: {
+        root: {
+          height: '100%',
+          width: '100%',
+        },
+      },
+    },
+    MuiBottomNavigationAction: {
+      styleOverrides: {
+        root: {
+          paddingTop: 20,     // Custom top padding
+          paddingBottom: 40,  // Custom bottom padding
+          minWidth: 0,
+          flex: 1,
+          flexDirection: 'column',
+          borderTop: '1px solid #00000015', // Replace #ccc with desired color
+        },
+        label: {
+          fontSize: 14,
+          paddingTop: 8,     // Custom top padding          
+          transition: 'none',
+          '&.Mui-selected': {
+            fontSize: 14,
+            //       fontWeight: 'bold',
+          },
+        },
+        iconOnly: {
+          // Optional: if you use icons without labels
+        },
+      },
+    },
+    MuiSvgIcon: {
+      styleOverrides: {
+        root: {
+          fontSize: 30, // Larger icons globally
+        },
+      },
+    },
+
+
     MuiStepLabel: {
       styleOverrides: {
         label: {
@@ -185,8 +268,9 @@ const theme = createTheme({
         root: {
           backgroundColor: '#fff', // Set a light grey background for ListItems
           padding: '0px 8px', // Adjust padding for ListItem
-          borderRadius: '0px', // Rounded corners for ListItem
-          marginBottom: '2px', // Space between ListItems
+          //         borderRadius: '0px', // Rounded corners for ListItem
+          //        marginBottom: '2px', // Space between ListItems
+          boxShadow: 'none',      // <-- Add this
           '&:hover': {
             backgroundColor: '#e0e0e0', // Hover effect: lighter grey
           },
@@ -202,8 +286,23 @@ const theme = createTheme({
     MuiTextField: {
       styleOverrides: {
         root: {
-          backgroundColor: '#ffffff', // Background color for TextField
-          borderRadius: 0, // Rounded corners
+          backgroundColor: '#ffffff',
+          borderRadius: 0,
+        },
+      },
+    },
+    MuiInput: {
+      styleOverrides: {
+        root: {
+          '&:before, &:after': {
+            borderBottom: 'none', // Remove underline before and after focus
+          },
+          '&:hover:not(.Mui-disabled):before': {
+            borderBottom: 'none', // Remove hover underline
+          },
+        },
+        input: {
+          textAlign: 'center', // Optional: center text
         },
       },
     },

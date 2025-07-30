@@ -10,7 +10,7 @@ export class WalletProvider extends Component {
         deposits: [],
         payments: [],
         logs: [],
-        maxLogSize: 1
+        maxLogSize: 20
     };
 
     setInvoices = (invoicesIn) => {
@@ -51,24 +51,25 @@ export class WalletProvider extends Component {
     };
 
     log = (eventTypeIn, eventIn) => {
-
         const now = new Date();
-
-        // Extract hours, minutes, and seconds
         const hours = now.getHours();
         const minutes = now.getMinutes();
         const seconds = now.getSeconds();
-        const mseconds = now.getMilliseconds();
+        const formattedTime = `${hours.toString().padStart(2, '0')}:` +
+            `${minutes.toString().padStart(2, '0')}:` +
+            `${seconds.toString().padStart(2, '0')}`;
 
-        // Format the time as HH:MM:SS
-        const formattedTime = `${hours.toString().padStart(2, '0')}:
-        ${minutes.toString().padStart(2, '0')}:
-        ${seconds.toString().padStart(2, '0')}`;
+        const fullMessage = `${formattedTime} : ${eventTypeIn} : ${eventIn}`;
 
-        const timestamp = new Date().toISOString();
+        // Console output depending on severity
+        if (eventTypeIn === "ERR") {
+            console.error(fullMessage);
+        } else {
+            console.log(fullMessage);
+        }
+
         this.setState(prevState => {
-            const updatedItems = [...prevState.logs, `${formattedTime} : ${eventTypeIn} : ${eventIn}`];
-            // Remove the oldest event if the array exceeds the max size
+            const updatedItems = [...prevState.logs, fullMessage];
             if (updatedItems.length > this.state.maxLogSize) {
                 updatedItems.shift();
             }

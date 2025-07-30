@@ -10,59 +10,32 @@ export default class WalletConnection extends Component {
 	decodeBolt11(bolt11In) {
 		return new Promise((resolve, reject) => {
 
-			const data = {
-				entity: {
-					amount_msat: "121212",
-					description: "Long Black Coffee",
-					payee: "Payee Details from Decode"
-				}
-			};
-
-			resolve(data);
-
-			//   client({method: 'GET', path: '/osys/wallet/decode?bolt11=' + bolt11In}).then(response => {
-			//    resolve(response); 
-			// });
+			   client({method: 'GET', path: '/osys/wallet/decode?bolt11=' + bolt11In}).then(response => {
+			    resolve(response); 
+			 });
 		});
 	}
 
 	getAccount = () => {
 		return new Promise((resolve, reject) => {
 
-			const data = {
-				entity: {
-					address: "bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwfmu9g",
-					availableBalance: "5000000"
-				}
-			};
-
-			resolve(data);
-
-			//	client({method: 'GET', path: '/osys/wallet/account'}).then(response => {
-			//	  resolve(response); 
-			//	});
+				client({method: 'GET', path: '/osys/wallet/account'}).then(response => {
+				  resolve(response); 
+				});
 		});
 	}
 
 	createInvoice = (inval) => {
+
+		console.log("Wallet Connection - Creating Invoice");
+		console.log("Creating Invoice " + inval.amountMsat);
+		console.log("Creating Description " + inval.description);
+
 		return new Promise((resolve, reject) => {
 
-			const data = {
-				entity: {
-					bolt11: "lnbc10u1ps7g39qpp5vrl9k6zg3fwmcxl7nhv2jvnldvflm9j2tfh7h4qz9fr5hywdpxfsdq8w3jhxapqdpsxqcqp2rzjqw9dj2em26yl60z6c3jt2h3qkf8u47sq2v5rwcrxlzvwyhlh3flw6gfhe7erdrkvsyg8sp76gyynap5k3tkqjphz0rp2qyglddd",
-					amountMsat: inval.amountMsat,
-					description: inval.description,
-					status: "unpaid",
-					payment_hash: "Payhash87687324kkjf"
-
-				}
-			};
-
-			resolve(data);
-
-			//	client({method: 'POST', path: '/api/invoices', entity: inval, headers: {'Content-Type':'application/json'}}).then(response => {
-			//	  resolve(response); 
-			//	});
+				client({method: 'POST', path: '/api/invoices', entity: inval, headers: {'Content-Type':'application/json'}}).then(response => {
+				  resolve(response); 
+				});
 		});
 	}
 
@@ -79,86 +52,36 @@ export default class WalletConnection extends Component {
 
 		return new Promise((resolve, reject) => {
 
-			const data = {
-				entity: {
-					bolt11: "lnbc10u1ps7g39qpp5vrl9k6zg3fwmcxl7nhv2jvnldvflm9j2tfh7h4qz9fr5hywdpxfsdq8w3jhxapqdpsxqcqp2rzjqw9dj2em26yl60z6c3jt2h3qkf8u47sq2v5rwcrxlzvwyhlh3flw6gfhe7erdrkvsyg8sp76gyynap5k3tkqjphz0rp2qyglddd",
-					amountMsat: "23434",
-					bolt11description: "Long Black Coffee Response",
-					status: "pending",
-					bolt11Payee: "bolt11Payeedsdfsdf"
-
-				}
-			};
-			resolve(data);
-
-			//	client({method: 'POST', path: '/api/pays', entity: newPay, headers: {'Content-Type':'application/json'}}).then(response => {
-			//	  resolve(response); 
-			//	});
+				client({method: 'POST', path: '/api/pays', entity: newPay, headers: {'Content-Type':'application/json'}}).then(response => {
+				  resolve(response); 
+				});
 		});
 	}
 
 	getInvoices = () => {
 		return new Promise((resolve, reject) => {
 
-			const data = {
-				entity: {
-					_embedded: {
-						invoices: [
-							{ bolt11: "bolt11INVadd1", timestamp: "1731016800", description: "Invoice Description 1 - Coffee", amountMsat: "323432434", status: 'paid' },
-							{ bolt11: "bolt11INVadd2ddd", timestamp: "1731076800", description: "Invoice 2 - Hair Cut", amountMsat: "3234324", status: 'pending' },
-							{ bolt11: "lnbc10u1ps7g39qpp5vrl9k6zg3fwmcxl7nhv2jvnldvflm9j2tfh7h4qz9fr5hywdpxfsdq8w3jhxapqdpsxqcqp2rzjqw9dj2em26yl60z6c3jt2h3qkf8u47sq2v5rwcrxlzvwyhlh3flw6gfhe7erdrkvsyg8sp76gyynap5k3tkqjphz0rp2qyglddd", timestamp: "1731075956", description: "Invoice Description 3 - Sample", amountMsat: "3234324", status: 'unpaid' }
-						]
-					},
-				}
-			};
-
-			resolve(data);
-
-			//	client({method: 'GET', path: '/api/invoices'}).then(response => {
-			//	  resolve(response); 
-			//	});
+				client({method: 'GET', path: '/api/invoices'}).then(response => {
+				  resolve(response); 
+				});
 		});
 	}
 
 	getPays = () => {
 		return new Promise((resolve, reject) => {
 
-			const data = {
-				entity: {
-					_embedded: {
-						pays: [
-							{ bolt11: "bolt11PAYadd1", timestamp: "1731075956", description: "Pays 1 - Payment for rent", amountMsat: "323432434", status: 'paid' },
-							{ bolt11: "bolt11PAYadd1", timestamp: "1731075956", description: "Pays 2 - Subscription", amountMsat: "323432434", status: 'paid' },
-							{ bolt11: "bolt11PAYadd1", timestamp: "1731075956", description: "Pays 3 - Internet", amountMsat: "323432434", status: 'paid' }
-						]
-					},
-				}
-			};
-
-			resolve(data);
-			//	client({method: 'GET', path: '/api/pays'}).then(response => {
-			//	  resolve(response); 
-			//	});
+				client({method: 'GET', path: '/api/pays'}).then(response => {
+				  resolve(response); 
+				});
 		});
 	}
 
 	getDeposits = () => {
 		return new Promise((resolve, reject) => {
 
-			const data = {
-				entity: {
-						outputs: [
-							{ blockheight: "1731075956", txid: "Deposit for Funding A", amount_msat: "323432434", status: 'paid' },
-							{ blockheight: "1731075956", txid: "Deposit for Funding B", amount_msat: "323432434", status: 'paid' },
-							{ blockheight: "1331065956", txid: "Dep CSH Basd", amount_msat: "323432434", status: 'unpaid' }
-						]
-				}
-			};
-
-			resolve(data);
-			//	client({method: 'GET', path: '/osys/wallet/funds'}).then(response => {
-			//	  resolve(response); 
-			//	});
+				client({method: 'GET', path: '/osys/wallet/funds'}).then(response => {
+				  resolve(response); 
+				});
 		});
 	}
 

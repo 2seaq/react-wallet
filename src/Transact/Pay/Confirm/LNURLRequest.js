@@ -135,10 +135,8 @@ class LNURLRequest extends Component {
         )}
         <Keypad handleNewAmount={this.handleNewAmount} />
         <Box display="flex" justifyContent="center" width="100%">
-          <ButtonGroup>
-            <Button onClick={this.props.handleReset} variant="outlined" startIcon={<HighlightOffIcon />}>Cancel</Button>
-            <Button onClick={this.handlePay} variant="outlined" disabled={isDisabled} endIcon={<SendIcon />}>Pay</Button>
-          </ButtonGroup>
+            <Button onClick={this.props.handleReset} startIcon={<HighlightOffIcon />}>Cancel</Button>
+            <Button onClick={this.handlePay} disabled={isDisabled} endIcon={<SendIcon />}>Pay</Button>
         </Box>
       </Box>
     );

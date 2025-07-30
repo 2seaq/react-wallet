@@ -7,30 +7,42 @@ class LoggerDisplay extends Component {
         return (
             <WalletConsumer>
                 {({ logs }) => (
-                    <Box >
-                            {
-                             logs.map(
-                                 (log, index) => {
+                    <Box
+                        sx={{
+                            maxWidth: 480,
+                            mx: 'auto',
+                            px: 2,
+                //            pt: 3,
+             //               pb: 4, // Space for bottom nav
+    //                        bgcolor: '#898989'
+
+                        }}
+
+                    >
+                        {
+                            logs.map(
+                                (log, index) => {
                                     const opacity = index * 0.4; // Decrease opacity by 0.1 for each log
                                     return (
                                         <Box
                                             key={index}
-                                            style={{ opacity: Math.max(opacity, 0.1) }} // Ensure minimum opacity of 0.1
+                                            style={{ opacity: 1.0}}     
+       //                                     style={{ opacity: Math.max(opacity, 0.1) }} // Ensure minimum opacity of 0.1
                                         >
-                  <Typography
-                    variant="body2"
-                    sx={{
-                        fontSize: '0.7rem', // Very small font size
-                        textAlign: 'left',  // Align text to the left
-                      }}
-                  >
-                    {log}
-                  </Typography>
+                                            <Typography
+                                                variant="body2"
+                                                sx={{
+                                                    fontSize: '0.8rem', // Very small font size
+                                                    textAlign: 'left',  // Align text to the left
+                                                }}
+                                            >
+                                                {log}
+                                            </Typography>
                                         </Box>
                                     );
-                                 }
-                                )
-                            }
+                                }
+                            )
+                        }
                     </Box>
                 )}
             </WalletConsumer>

@@ -3,7 +3,7 @@ import * as React from 'react';
 import Bolt11Request from './Bolt11Request';
 import LNURLRequest from './LNURLRequest';
 
-export default class ConfirmPaymentDetails extends React.Component  {
+export default class Confirm extends React.Component  {
 
     constructor(props) {
 		super(props);
@@ -19,6 +19,8 @@ export default class ConfirmPaymentDetails extends React.Component  {
 		switch(this.props.paymentRequest.type) {
 		    case 'BOLT11':
 				return <Bolt11Request 
+				handleStepBack={this.props.handleStepBack}
+				handlePayDialogClose={this.props.handlePayDialogClose}
 				paymentRequest={this.props.paymentRequest}
 				setPayment={this.props.setPayment}				
 				handleReset={this.handleReset}/>			

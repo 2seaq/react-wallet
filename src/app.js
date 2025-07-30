@@ -5,188 +5,183 @@ import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import ImportExportIcon from '@mui/icons-material/ImportExport';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import SettingsIcon from '@mui/icons-material/Settings';
-import History from './History/History';
+import Alert from '@mui/material/Alert';
+
+import Activity from './Activity/Activity';
 import Settings from './Settings/Settings';
 import Transact from './Transact/Transact';
+
 import WalletConnection from './WalletConnection';
 import SocketConnection from './SocketConnection';
-import LoggerDisplay from './LoggerDisplay';
 import { WalletContext } from './context/WalletContext';
+import { SOCKET_URL } from './conf';
 
 const walletConnection = new WalletConnection();
-//React Standalone
-const socketConnection = new SocketConnection("http://localhost:3000/websocket");
-
-//Spring SSL
-//const socketConnection = new SocketConnection("https://localhost:8443/websocket");
-
-//CUSTOM
-//const socketConnection = new SocketConnection("https://www.yourwebsocketwebsite.com/websocket");
-
-const stompClient = require('./websocket-listener');
+const socketConnection = new SocketConnection(SOCKET_URL);
 
 export default class App extends React.Component {
-
 	static contextType = WalletContext;
 
 	constructor(props) {
 		super(props);
 		this.state = {
-			val: 0,
+			selectedTab: 0,
 			loggedInManager: this.props.loggedInManager,
 		};
 	}
 
 	componentDidMount() {
-
 		this.logMessage("INFO", "App Component Mounted");
-		this.logMessage("INFO", socketConnection.getStatus());
-		this.loadFromServer();
+		this.logMessage("INFO", "Socket Active " + socketConnection.getStatus());
 
-		this.logMessage("INFO", "Register Socket Listeners");
+		this.loadWalletData();
+
 		socketConnection.isEndPointActive()
-		.then(isActive => {
-			if (!isActive) throw new Error('Network response was not ok');
-			// Proceed with registration if the endpoint is active
-			socketConnection.register([
-				{ route: '/user/queue/newInvoiceCreated', callback: this.newInvoiceCreated },
-				{ route: '/user/queue/invoicePaid', callback: this.invoicePaid },
-				{ route: '/user/queue/newPayCreated', callback: this.newPayCreated },
-			]);
-			this.logMessage("INFO", "Socket Registration ok");
-		})
-		.catch(error => {
-			this.logMessage("INFO", "Socket Endpoint Not Active");
-		});
-	
-
-		this.interval = setInterval(this.scheduledCall, 4000);
+			.then(isActive => {
+				if (!isActive) throw new Error('WebSocket endpoint is not active');
+				this.logMessage("INFO", "Registering WebSocket listeners...");
+				return socketConnection.register([
+					{ route: '/user/queue/newInvoiceCreated', callback: this.handleNewInvoice },
+					{ route: '/user/queue/invoicePaid', callback: this.handleInvoicePaid },
+					{ route: '/user/queue/newPayCreated', callback: this.handleNewPay },
+				]);
+			})
+			.then(() => {
+				this.logMessage("INFO", "WebSocket connected and listeners registered");
+				this.interval = setInterval(this.loadWalletData, 4000);
+			})
+			.catch(error => {
+				this.logMessage("ERR", `WebSocket connection failed: ${error.message}`);
+			});
 	}
 
 	componentWillUnmount() {
-		// Clear the interval when the component is unmounted
 		clearInterval(this.interval);
+		this.logMessage("INFO", "App Component Unmounted");
+		this.logMessage("INFO", "Unregistering WebSocket listeners and closing connection");
+		if (typeof socketConnection.unregister === 'function') {
+			socketConnection.unregister();
+		}
+		if (typeof socketConnection.disconnect === 'function') {
+			socketConnection.disconnect(); // optional method, if implemented
+		}
 	}
-
-	handleClick = (inval) => {
-//		this.logMessage("INFO", "Navigate Tab : " + inval);
-		this.setState({
-			val: inval
-		});
-	}
-
-	loadFromServer() {
-		this.logMessage("INFO", "Load From Server");
-		this.getInvoicesAll();
-		this.getPaysAll();
-		this.getDepositsAll();
-		this.getAccount();
-	}
-
-	// Set Account state - Invoices Pays Deposits Account
-	getInvoicesAll = () => {
-		const { setInvoices } = this.context;
-		walletConnection.getInvoices().then(response => {
-			setInvoices(response.entity._embedded.invoices);
-		});
-	}
-
-	getPaysAll = () => {
-		const { setPayments } = this.context;
-		walletConnection.getPays().then(response => {
-			setPayments(response.entity._embedded.pays);
-		});
-	}
-
-	getDepositsAll = () => {
-		const { setDeposits } = this.context;
-		walletConnection.getDeposits().then(response => {
-			setDeposits(response.entity.outputs);
-		});
-	}
-
-	getAccount = () => {
-		const { setAddress } = this.context;
-		const { setAvailableBalance } = this.context;
-		walletConnection.getAccount().then(response => {
-			setAddress(response.entity.address);
-			setAvailableBalance(response.entity.availableBalance);
-		});
-	}
-
-	// WebSocket Handling 
-	newInvoiceCreated = (message) => {
-		this.logMessage("INFO", "newInvoiceCreated");
-		this.getInvoicesAll();
-		this.getAccount();
-	}
-
-	newPayCreated = (message) => {
-		this.logMessage("INFO", "newPayCreated");
-		this.getPaysAll();
-		this.getAccount();
-	}
-
-	invoicePaid = (message) => {
-		this.logMessage("INFO", "invoicePaid");
-		this.getInvoicesAll();
-		this.getAccount();
-	}
-
-	// Scheduled Calls 
-	scheduledCall = () => {
-		this.getDepositsAll();
-		this.getInvoicesAll();
-		this.getAccount();
-	};
 
 	logMessage = (messageTypeIn, messageIn) => {
 		const { log } = this.context;
 		log(messageTypeIn, messageIn);
 	};
 
-	render() {
-		const components = [
-			<Transact />,
-			<History />,
-			<Settings />];
+	handleNavigationChange = (tabIndex) => {
+		this.setState({ selectedTab: tabIndex });
+	};
 
+	loadWalletData = () => {
+		this.logMessage("INFO", "Loading wallet data from server...");
+		this.fetchInvoices();
+		this.fetchPayments();
+		this.fetchDeposits();
+		this.fetchAccount();
+	};
+
+	fetchInvoices = () => {
+		const { setInvoices } = this.context;
+		walletConnection.getInvoices()
+			.then(res => setInvoices(res.entity._embedded.invoices))
+			.catch(err => this.logMessage("ERR", `Failed to fetch invoices: ${err.message}`));
+	};
+
+	fetchPayments = () => {
+		const { setPayments } = this.context;
+		walletConnection.getPays()
+			.then(res => setPayments(res.entity._embedded.pays))
+			.catch(err => this.logMessage("ERR", `Failed to fetch payments: ${err.message}`));
+	};
+
+	fetchDeposits = () => {
+		const { setDeposits } = this.context;
+		walletConnection.getDeposits()
+			.then(res => setDeposits(res.entity.outputs))
+			.catch(err => this.logMessage("ERR", `Failed to fetch deposits: ${err.message}`));
+	};
+
+	fetchAccount = () => {
+		const { setAddress, setAvailableBalance } = this.context;
+		walletConnection.getAccount()
+			.then(res => {
+				setAddress(res.entity.address);
+				setAvailableBalance(res.entity.availableBalance);
+			})
+			.catch(err => this.logMessage("ERR", `Failed to fetch account: ${err.message}`));
+	};
+
+	handleNewInvoice = () => {
+		this.logMessage("INFO", "New Invoice Created");
+		this.fetchInvoices();
+		this.fetchAccount();
+	};
+
+	handleInvoicePaid = () => {
+		this.logMessage("INFO", "Invoice Paid");
+		this.fetchInvoices();
+		this.fetchAccount();
+	};
+
+	handleNewPay = () => {
+		this.logMessage("INFO", "New Pay Created");
+		this.fetchPayments();
+		this.fetchAccount();
+	};
+
+	renderActiveTab() {
+		switch (this.state.selectedTab) {
+			case 0: return <Transact />;
+			case 1: return <Activity />;
+			case 2: return <Settings />;
+			default: return null;
+		}
+	}
+
+	render() {
 		return (
-				<div>
-					<Box>
-						{components[this.state.val]}
-					</Box>
-					<Box sx={{ position: 'fixed', bottom: 60, left: 10, right: 0, width: 1 }} >
-						<LoggerDisplay />
-					</Box>
-					<Box sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
-						<WalletBottomNav onNavigate={this.handleClick} />
-					</Box>
-				</div>
-		)
+			<Box sx={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
+				<Box sx={{ flexShrink: 0, pt: 5 }}>
+					<Alert severity="info" sx={{ alignItems: 'center' }}>
+						Testnet 4
+					</Alert>
+				</Box>
+
+				<Box sx={{ flexGrow: 1, overflow: 'auto', pb: '30px' }}>
+					{this.renderActiveTab()}
+				</Box>
+
+				<Box sx={{ flexShrink: 0 }}>
+					<WalletBottomNav
+						value={this.state.selectedTab}
+						onChange={this.handleNavigationChange}
+					/>
+				</Box>
+			</Box>
+		);
 	}
 }
 
 class WalletBottomNav extends React.Component {
-
-	constructor(props) {
-		super(props);
-		this.state = { val1: 1 };
-	}
-
-	handleChange = (event, value) => {
-		this.props.onNavigate(value);
+	handleChange = (event, newValue) => {
+		this.props.onChange(newValue);
 	};
 
 	render() {
 		return (
-			<Box sx={{ width: 1 }}>
-				<BottomNavigation showLabels onChange={this.handleChange}>
-					<BottomNavigationAction label="Transact" icon={<ImportExportIcon />} />
-					<BottomNavigationAction label="Activity" icon={<FormatListBulletedIcon />} />
-					<BottomNavigationAction label="Settings" icon={<SettingsIcon />} />
-				</BottomNavigation>
-			</Box>
-		)
+			<BottomNavigation
+				showLabels
+				value={this.props.value}
+				onChange={this.handleChange}
+			>
+				<BottomNavigationAction label="Transact" icon={<ImportExportIcon />} />
+				<BottomNavigationAction label="Activity" icon={<FormatListBulletedIcon />} />
+				<BottomNavigationAction label="Settings" icon={<SettingsIcon />} />
+			</BottomNavigation>
+		);
 	}
 }
