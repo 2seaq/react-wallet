@@ -1,11 +1,13 @@
 # A Simple React UI for a Bitcoin Lightning payments
 
-This is project is a simple implementation of a bitcoin lightning wallet UI. It is purely an interface to connect to a service providing lightning payments. It is a react SPA which makes API calls to a separate service.
+This is project is a simple implementation of a bitcoin lightning wallet UI. It is purely an interface to connect to a service providing lightning payments. It is a React SPA PWA which makes API calls to a separate service.
 
-![react-wallet-home](https://github.com/user-attachments/assets/fc1472c5-09d1-47fb-b6ca-8d94fd9cdb4d)
-![react-wallet-receive](https://github.com/user-attachments/assets/576a3d77-a283-4d69-9196-9eaef337469f)
-![react-wallet-qr](https://github.com/user-attachments/assets/70ce764d-82ec-47e0-be55-8d97263ed9ea)
-![react-wallet-history](https://github.com/user-attachments/assets/8459c147-77cd-457f-94a5-25e16902cbbe)
+<img width="389" height="847" alt="image" src="https://github.com/user-attachments/assets/656111c0-fd7e-45b3-b523-0373902f5cd6" />
+<img width="389" height="847" alt="image" src="https://github.com/user-attachments/assets/cf68ce78-5c17-4dff-8013-cec2f1f4ae1d" />
+<img width="389" height="847" alt="image" src="https://github.com/user-attachments/assets/827cdfb7-47ce-484e-90ad-2d5b19a171fe" />
+<img width="389" height="847" alt="image" src="https://github.com/user-attachments/assets/3b2325d3-6581-4f40-8924-6fc37cd12072" />
+
+It was redesigned in mid 2025 to be (loosely) based on wallet design specification at https://bitcoin.design/guide/
 
 Note this is still needs alot of work and there are plenty of bugs :D
 
@@ -31,5 +33,6 @@ npm cache clean -force
 ```
 
 ### Spring Application
-To build and run the react lightning UI with the Spring Boot application. Follow these steps:
+To build and run the react lightning UI with the Spring Boot application simply build the application using npm run build. This will create a js file (detailed in the build information)
+That can then be copied and referenced in the index.html of the spring application. Note the url for the websocket should be configured to the correct url.
 
