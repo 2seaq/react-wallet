@@ -11,6 +11,12 @@ It was redesigned in mid 2025 to be (loosely) based on wallet design specificati
 
 Note this is still needs alot of work and there are plenty of bugs :D
 
+## Live Version
+
+I have a live implementation running on Testnet4 at https://wallet.osys.com
+
+Note: Its a custodial wallet that uses Oauth (Google / Github) It is what it is.. Its all kind of experimental so may not always be running. Have a look at osys.com for details on my nodes too.
+
 ## Service
 
 A related Spring Boot application is located in a separate repository.
