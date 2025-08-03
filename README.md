@@ -2,10 +2,10 @@
 
 This is project is a simple implementation of a bitcoin lightning wallet UI. It is purely an interface to connect to a service providing lightning payments. It is a React SPA PWA which makes API calls to a separate service.
 
-<img width="389" height="847" alt="image" src="https://github.com/user-attachments/assets/656111c0-fd7e-45b3-b523-0373902f5cd6" />
-<img width="389" height="847" alt="image" src="https://github.com/user-attachments/assets/cf68ce78-5c17-4dff-8013-cec2f1f4ae1d" />
-<img width="389" height="847" alt="image" src="https://github.com/user-attachments/assets/827cdfb7-47ce-484e-90ad-2d5b19a171fe" />
-<img width="389" height="847" alt="image" src="https://github.com/user-attachments/assets/3b2325d3-6581-4f40-8924-6fc37cd12072" />
+<img width="195" height="424" alt="image" src="https://github.com/user-attachments/assets/656111c0-fd7e-45b3-b523-0373902f5cd6" />
+<img width="195" height="424" alt="image" src="https://github.com/user-attachments/assets/cf68ce78-5c17-4dff-8013-cec2f1f4ae1d" />
+<img width="195" height="424" alt="image" src="https://github.com/user-attachments/assets/827cdfb7-47ce-484e-90ad-2d5b19a171fe" />
+<img width="195" height="424" alt="image" src="https://github.com/user-attachments/assets/3b2325d3-6581-4f40-8924-6fc37cd12072" />
 
 It was redesigned in mid 2025 to be (loosely) based on wallet design specification at https://bitcoin.design/guide/
 
