@@ -64,7 +64,7 @@ export default class PayConfirmedFailed extends React.Component {
 				>
 					<Divider sx={{ borderColor: '#eee' }} />
 					<Typography variant="body2" color="text.secondary">Amount</Typography>
-					<Typography variant="body1">{amount_msat} sats</Typography>
+					<Typography variant="body1">{amount_msat / 1000} sats</Typography>
 
 					<Divider sx={{ borderColor: '#eee' }} />
 					<Typography variant="body2" color="text.secondary">Description</Typography>

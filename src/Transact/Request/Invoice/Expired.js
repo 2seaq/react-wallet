@@ -44,7 +44,7 @@ export default class Expired extends React.Component  {
 							<Typography style={{ color: '#00000046' }}>Amount</Typography>
 						</Grid>
 						<Grid item xs={7}>
-							<Typography>+{this.props.createdInvoiceRepsonse.amountMsat} sats</Typography>
+							<Typography>+{this.props.createdInvoiceRepsonse.amountMsat / 1000} sats</Typography>
 						</Grid>
 						<Grid item xs={5} textAlign="right">
 							<Typography></Typography>
